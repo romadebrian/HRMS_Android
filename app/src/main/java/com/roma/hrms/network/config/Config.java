@@ -6,7 +6,9 @@ public class Config {
 
     public static final String API_URL = BASE_URL + "/Android_Login";
 
-    public static final String API_LOGIN = API_URL + "/login.php";
+    public static final String API_LOGIN = API_URL + "/login_2.php";
     public static final String API_REGISTER = API_URL + "/register.php";
+
+    //public static final String API_TOKEN = API_URL + "/";
 
 }

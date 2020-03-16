@@ -11,15 +11,21 @@ import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.roma.hrms.model.User;
 import com.roma.hrms.network.LoginService;
 import com.roma.hrms.util.PrefUtil;
@@ -29,6 +35,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
+    private static final String TAG = "LoginActivity";
 
     private EditText emailText;
     private EditText passwordText;
@@ -77,12 +84,34 @@ public class LoginActivity extends AppCompatActivity {
 
         registerCaption.setText(spannableStringBuilder);
         registerCaption.setMovementMethod(LinkMovementMethod.getInstance());
-
     }
 
     void loginAct() {
+        // [START retrieve_current_token]
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "getInstanceId failed", task.getException());
+                            return;
+                        }
+
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+                        String hasil_token = getString(R.string.Token_Code, token);
+
+                        // Log and toast
+                        String msg = getString(R.string.msg_token_fmt, token);
+                        Log.d(TAG, msg);
+                        Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+        // [END retrieve_current_token]
+
         String email = emailText.getText().toString();
         String password = passwordText.getText().toString();
+        String Token_Login = getString(R.string.Token_Code);
 
         if(TextUtils.isEmpty(email)) {
             emailText.setError("Email cannot be empty!");
@@ -95,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         loginService = new LoginService(this);
-        loginService.doLogin(email, password, new Callback() {
+        loginService.doLogin(email, password, Token_Login, new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
                 User user = (User) response.body();
