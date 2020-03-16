@@ -36,6 +36,7 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
+    public static String TokenS;
 
     private EditText emailText;
     private EditText passwordText;
@@ -99,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         // Get new Instance ID token
                         String token = task.getResult().getToken();
-                        String hasil_token = getString(R.string.Token_Code, token);
+                        LoginActivity.TokenS = token; // Set variable yang public
 
                         // Log and toast
                         String msg = getString(R.string.msg_token_fmt, token);
@@ -111,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
 
         String email = emailText.getText().toString();
         String password = passwordText.getText().toString();
-        String Token_Login = getString(R.string.Token_Code);
+        String token_login = LoginActivity.TokenS; // Step 1 Bikin variable
 
         if(TextUtils.isEmpty(email)) {
             emailText.setError("Email cannot be empty!");
@@ -124,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         loginService = new LoginService(this);
-        loginService.doLogin(email, password, Token_Login, new Callback() {
+        loginService.doLogin(email, password, token_login, new Callback() { // Step 2 [Token Login] Menuju ke LoginService
             @Override
             public void onResponse(Call call, Response response) {
                 User user = (User) response.body();

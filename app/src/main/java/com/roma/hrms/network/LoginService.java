@@ -16,8 +16,8 @@ public class LoginService {
                 .create(LoginInterface.class);
     }
 
-    public void doLogin(String email, String password, String Token_Login, Callback callback) {
-        loginInterface.login(email, password).enqueue(callback);
+    public void doLogin(String email, String password, String token_login, Callback callback) { // Step 3 set string [token_login]
+        loginInterface.login(email, password, token_login).enqueue(callback); // Step 4 [Menjuju ke interfaces.LoginInterface]
     }
 
 }

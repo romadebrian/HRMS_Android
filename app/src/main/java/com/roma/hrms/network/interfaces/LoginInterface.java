@@ -14,6 +14,6 @@ public interface LoginInterface {
     @POST(Config.API_LOGIN)
     Call<User> login(
             @Field("email") String email,
-            @Field("password") String password);
-
+            @Field("password") String password,
+            @Field("Token_DB") String token_login); // Step 5 set untuk ($_POST['Token_DB']) adalah Token DB
 }
