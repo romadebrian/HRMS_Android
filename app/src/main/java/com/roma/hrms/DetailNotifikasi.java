@@ -11,4 +11,6 @@ public class DetailNotifikasi extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_notifikasi);
     }
+    // TODO: Detail Notifikasi ketika di buka.
+    // Jadi pas di buka notifikasinya bisa ke sini atau web view.
 }
