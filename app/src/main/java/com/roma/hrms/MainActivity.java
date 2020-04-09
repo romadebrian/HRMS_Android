@@ -98,4 +98,6 @@ public class MainActivity extends AppCompatActivity {
         FirebaseMessaging.getInstance().setAutoInitEnabled(true);
         // [END fcm_runtime_enable_auto_init]
     }
+
+    // TODO: Membuat List Grup Notifikasi Dynamic.
 }

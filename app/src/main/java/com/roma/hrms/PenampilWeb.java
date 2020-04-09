@@ -4,12 +4,11 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class List_Notifikasi extends AppCompatActivity {
+public class PenampilWeb extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list__notifikasi);
+        setContentView(R.layout.activity_penampil_web);
     }
-    // TODO: Membuat List Notifikasi Dynamic Berdasarkan Grup.
 }

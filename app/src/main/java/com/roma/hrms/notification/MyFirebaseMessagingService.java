@@ -38,7 +38,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     // [END on_new_token]
 
     private void sendRegistrationToServer(String token) {
-        // TODO: Implement this method to send token to your app server.
+        // TODOs: Implement this method to send token to your app server.
     }
 
     // ============================== MyFirebaseInstanceIDService ==============================
@@ -46,13 +46,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
-        // TODO(developer): Handle FCM messages here.
+        // TODOs(developer): Handle FCM messages here.
         Log.d(TAG, "From: " + remoteMessage.getFrom());
 
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
-
         }
 
         // Check if message contains a notification payload.
@@ -61,7 +60,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             //Judul_Notifikasi_Void(remoteMessage.getNotification().getTitle());
             MyFirebaseMessagingService.Judul_Notifikasi = remoteMessage.getNotification().getTitle(); // Set variable yang public
             sendNotification(remoteMessage.getNotification().getBody());
-
         }
     }
 
